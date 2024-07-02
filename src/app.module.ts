@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ProductsController } from 'src/controllers/products/products.controller';
+import { ProductsService } from 'src/services/products/products.service';
+import { PrismaService } from 'src/services/prisma.service';
+import { ProductSkuValidation } from 'src/controllers/products/decorators/validate-product-sku.decorator';
+import { ProductCategoryValidation } from 'src/controllers/products/decorators/validate-product-category.decorator';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
+  controllers: [ProductsController],
   providers: [
-    AppService,
+    ProductSkuValidation,
+    ProductCategoryValidation,
+    ProductsService,
     PrismaService
   ]
 })
