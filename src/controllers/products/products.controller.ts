@@ -9,7 +9,7 @@ import {
   UpdateProductRequestBody
 } from 'src/controllers/products/schemas/products.request.dto';
 import { ProductsService, ProductWithCategory } from 'src/services/products/products.service';
-import { Product } from 'prisma/client';
+import { Product } from '@prisma/client';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Products')

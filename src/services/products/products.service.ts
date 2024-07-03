@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Category, Product } from 'prisma/client';
+import { Category, Product } from '@prisma/client';
 import {
   ProductResponseItem,
   ProductWithCategoryResponseItem
