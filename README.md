@@ -29,7 +29,6 @@
 ## Installation
 
 ```bash
-$ npm install
 $ npm run local:provision
 ```
 
