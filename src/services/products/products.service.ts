@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from 'prisma/client';
+import { Category, Product } from 'prisma/client';
 import {
   ProductResponseItem,
   ProductWithCategoryResponseItem
 } from 'src/controllers/products/schemas/products.response.dto';
 import { CreateProductProps, UpdateProductProps } from 'src/services/products/types/inputs.type';
 import { PrismaService } from '../prisma.service';
-import { ProductWithCategory } from 'src/services/products/types/products.type';
+
+export type ProductWithCategory = Product & { category: Category };
 
 @Injectable()
 export class ProductsService {
@@ -18,10 +19,8 @@ export class ProductsService {
     });
   }
 
-  async getProductWithSku(sku: string): Promise<Product> {
-    return this.prismaService.product.findFirst({
-      where: { sku }
-    });
+  async listProducts(): Promise<Product[]> {
+    return this.prismaService.product.findMany();
   }
 
   async attachCategoryToProduct(product: Product): Promise<ProductWithCategory> {
@@ -57,7 +56,11 @@ export class ProductsService {
     });
   }
 
-  constructProductWithCategoryRestResponseItem(product: ProductWithCategory): ProductWithCategoryResponseItem {
+  constructProductResponseItemsList(products: Product[]): ProductResponseItem[] {
+    return products.map((i) => this.constructProductResponseItem(i));
+  }
+
+  constructProductWithCategoryResponseItem(product: ProductWithCategory): ProductWithCategoryResponseItem {
     return {
       id: product.id,
       title: product.title,
@@ -72,7 +75,7 @@ export class ProductsService {
     };
   }
 
-  constructProductRestResponseItem(product: Product): ProductResponseItem {
+  constructProductResponseItem(product: Product): ProductResponseItem {
     return {
       id: product.id,
       title: product.title,

@@ -28,7 +28,7 @@ export class ProductSkuValidation implements ValidatorConstraintInterface {
 
   async validate(value: string, validationArguments: ValidationArguments): Promise<boolean> {
     const product = await this.prisma.product.findUnique({ where: { sku: value }});
-    if (product && validationArguments['object'] instanceof CreateProductRequestBody) {
+    if (product) {
       throw new BadRequestException('Product with this SKU already exists');
     }
     return true;

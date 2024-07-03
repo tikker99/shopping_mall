@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsString, IsNumber, IsPositive, IsAlphanumeric, Length, ValidateIf, IsOptional } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsString, IsNumber, IsPositive, IsAlphanumeric, Length, ValidateIf } from 'class-validator';
 import * as _ from 'lodash';
 import { ValidateProductSku } from 'src/controllers/products/decorators/validate-product-sku.decorator';
 import { ValidateProductCategory } from 'src/controllers/products/decorators/validate-product-category.decorator';
